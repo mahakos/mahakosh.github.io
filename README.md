@@ -1,3 +1,3 @@
-# Mahakosh Silicon website
+# Neesil website
 
-Website of Mahakosh Silicon, served by GitHub Pages at https://mahakos.github.io/mahakosh.github.io/
+Website of Neesil, a chip verification team from India. Served by GitHub Pages at https://mahakos.github.io/mahakosh.github.io/

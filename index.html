@@ -1,33 +1,400 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mahakosh Silicon · Chip Verification Services</title>
-<meta name="description" content="Mahakosh Silicon: affordable chip design verification services, open-source verification IP, and job-ready DV training from India.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Neesil</title>
+<meta name="description" content="Neesil is a small chip verification team from India. We write the testbenches, close coverage and find the bugs before tape-out.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+Telugu:wght@700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-:root{--bg:#0b1020;--card:#141b33;--fg:#e8ecf8;--mut:#9aa6c7;--acc:#38d39f}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
-.w{max-width:1000px;margin:auto;padding:0 16px}header{padding:72px 0 40px}h1{font-size:2.4rem;margin:0}h1 span{color:var(--acc)}
-.t{color:var(--mut);font-size:1.15rem;max-width:640px}.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:32px 0}
-.c{background:var(--card);border-radius:12px;padding:20px}.c h3{margin-top:0;color:var(--acc)}.s{display:flex;gap:24px;flex-wrap:wrap;margin:24px 0}
-.s div{background:var(--card);border-radius:12px;padding:16px 20px}.s b{font-size:1.6rem;display:block}a.btn{display:inline-block;background:var(--acc);color:#05261a;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600}
-footer{color:var(--mut);padding:40px 0;font-size:.9rem}
+/* Layout: one long scroll told as a debug session. Hero = a live waveform where an assertion catches a bug; sections read like a conversation with the founder. */
+:root{
+  --paper:#F6F7F3;      /* wafer-white with a hint of green */
+  --ink:#14211C;        /* deep solder-mask ink */
+  --muted:#56635D;
+  --line:#D9DED6;
+  --panel:#ECEFE8;
+  --grain:#B9831A;      /* die-gold, the one bold colour */
+  --grain-soft:#F3E6C6;
+  --sig:#1F7A57;        /* waveform green */
+  --bad:#C2412D;        /* assertion failure */
+  --wave-bg:#101A16;
+  --wave-fg:#CFE3D8;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1512;--ink:#E7EEE9;--muted:#9DAEA5;--line:#24332C;--panel:#16211C;
+  --grain:#E0A93A;--grain-soft:#3A2E14;--sig:#4FC08D;--bad:#F06A52;--wave-bg:#08100D;--wave-fg:#CFE3D8;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1512;--ink:#E7EEE9;--muted:#9DAEA5;--line:#24332C;--panel:#16211C;
+  --grain:#E0A93A;--grain-soft:#3A2E14;--sig:#4FC08D;--bad:#F06A52;--wave-bg:#08100D;--wave-fg:#CFE3D8;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:1.0625rem;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--grain);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.08;margin:0}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grain)}
+.lede{color:var(--muted);max-width:62ch}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:800;font-size:1.2rem}
+.brand svg{flex:none}
+.links{display:flex;gap:22px;font-size:.95rem}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+@media (max-width:760px){.links{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 1rem var(--f-body);padding:12px 20px;border-radius:999px;text-decoration:none;border:2px solid var(--ink);cursor:pointer;transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.small{padding:8px 14px;font-size:.9rem}
+
+/* hero */
+.hero{padding-block:64px 40px}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero-grid>*{min-width:0}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+.hero h1{font-size:clamp(2.5rem,6.4vw,4.6rem);font-weight:800;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--grain)}
+.hero .lede{font-size:1.2rem;margin-top:22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hello{margin-top:26px;font-size:.95rem;color:var(--muted)}
+
+/* waveform viewer */
+.scope{background:var(--wave-bg);color:var(--wave-fg);border-radius:14px;overflow:hidden;font-family:var(--f-mono);font-size:.78rem;box-shadow:0 24px 60px -30px rgba(0,0,0,.55)}
+.scope-bar{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(207,227,216,.12);color:#8FA89B}
+.scope-bar b{color:var(--wave-fg);font-weight:600}
+.scope-body{overflow-x:auto}
+.scope svg{display:block;width:100%;min-width:420px;height:auto}
+.scope .lbl{fill:#8FA89B;font-family:var(--f-mono);font-size:11px}
+.scope .w{fill:none;stroke:#5FD39C;stroke-width:1.6}
+.scope .bus{fill:none;stroke:#E9C46A;stroke-width:1.4}
+.scope .bust{fill:#E9C46A;font-family:var(--f-mono);font-size:10px}
+.scope .grid{stroke:rgba(207,227,216,.07)}
+.scope .cursor{stroke:#FF7A62;stroke-width:1.5;stroke-dasharray:3 3}
+.scope .badbox{fill:rgba(255,122,98,.14);stroke:#FF7A62}
+.scope .badt{fill:#FF9C88;font-family:var(--f-mono);font-size:10.5px;font-weight:600}
+.scope-log{padding:10px 14px 14px;border-top:1px solid rgba(207,227,216,.12);line-height:1.7}
+.scope-log .err{color:#FF9C88}
+.scope-log .ok{color:#5FD39C}
+.draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pop{opacity:1;animation:pop .5s 2.2s both}
+@keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* facts */
+.facts{border-block:1px solid var(--line);margin-top:40px}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.fact{padding-block:26px;padding-right:24px}
+.fact+.fact{border-left:1px solid var(--line);padding-left:24px}
+.fact b{display:block;font-family:var(--f-display);font-size:2.4rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.fact span{display:block;margin-top:8px;color:var(--muted);font-size:.95rem}
+.fact small{display:block;margin-top:6px;font-family:var(--f-mono);font-size:.7rem;color:var(--muted);opacity:.8}
+@media (max-width:760px){.facts .wrap{grid-template-columns:1fr}.fact+.fact{border-left:0;border-top:1px solid var(--line);padding-left:0}}
+
+section{padding-block:84px}
+.head{display:grid;gap:14px;margin-bottom:40px;max-width:720px}
+
+/* story */
+.story{display:grid;grid-template-columns:280px 1fr;gap:56px;align-items:start}
+.story>*{min-width:0}
+@media (max-width:860px){.story{grid-template-columns:1fr;gap:28px}}
+.word{background:var(--grain-soft);border-radius:16px;padding:28px;display:grid;gap:10px}
+.word .te{font-family:"Noto Sans Telugu",var(--f-display);font-size:2.2rem;font-weight:800;line-height:1;color:var(--grain)}
+.word .ro{font-family:var(--f-mono);font-size:.85rem}
+.word p{color:var(--ink);font-size:.95rem}
+.story-text{display:grid;gap:18px;max-width:64ch}
+.story-text p{font-size:1.12rem}
+.sign{font-family:var(--f-display);font-weight:700;font-size:1.15rem}
+.sign span{display:block;font-family:var(--f-body);font-weight:400;font-size:.9rem;color:var(--muted)}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.services{grid-template-columns:1fr}}
+.svc{border-top:3px solid var(--ink);padding-top:20px;display:grid;gap:12px;align-content:start}
+.svc p{color:var(--muted)}
+.svc ul{margin:0;padding-left:18px;color:var(--ink);font-size:.97rem;display:grid;gap:4px}
+.tag{font-family:var(--f-mono);font-size:.75rem;color:var(--sig)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;counter-reset:s;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media (max-width:900px){.steps{grid-template-columns:1fr}}
+.step{padding:28px;display:grid;gap:10px;align-content:start;background:var(--panel)}
+.step+.step{border-left:1px solid var(--line)}
+@media (max-width:900px){.step+.step{border-left:0;border-top:1px solid var(--line)}}
+.step .when{font-family:var(--f-mono);font-size:.8rem;color:var(--grain)}
+.step p{color:var(--muted)}
+
+/* open source */
+.oss{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.oss>*{min-width:0}
+@media (max-width:860px){.oss{grid-template-columns:1fr}}
+.term{background:var(--wave-bg);color:var(--wave-fg);border-radius:14px;padding:18px 20px;font-family:var(--f-mono);font-size:.8rem;line-height:1.8;overflow-x:auto;white-space:pre;margin:0}
+.term .p{color:#8FA89B}.term .g{color:#5FD39C}
+.oss-text{display:grid;gap:16px}
+.oss-text p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--f-mono);font-size:.78rem;padding:5px 10px;border-radius:999px;border:1px solid var(--line)}
+.chip.done{border-color:var(--sig);color:var(--sig)}
+
+/* academy */
+.academy{background:var(--ink);color:var(--paper);border-radius:22px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+.academy>*{min-width:0}
+@media (max-width:860px){.academy{grid-template-columns:1fr}}
+.academy .eyebrow{color:var(--grain)}
+.academy h2{color:var(--paper)}
+.academy p{color:color-mix(in srgb,var(--paper) 78%,var(--ink))}
+.weeks{display:grid;gap:0;font-size:.95rem}
+.weeks div{display:grid;grid-template-columns:80px 1fr;gap:12px;padding-block:9px;border-bottom:1px solid color-mix(in srgb,var(--paper) 18%,var(--ink))}
+.weeks span{font-family:var(--f-mono);font-size:.78rem;color:var(--grain);padding-top:2px}
+.price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:6px}
+.price b{font-family:var(--f-display);font-size:2.4rem;font-weight:800;color:var(--paper)}
+.academy .btn{border-color:var(--paper);background:var(--paper);color:var(--ink);justify-self:start}
+.academy-copy{display:grid;gap:16px;align-content:start}
+
+/* faq */
+.faq{display:grid;gap:0;max-width:820px}
+details{border-bottom:1px solid var(--line);padding-block:18px}
+summary{cursor:pointer;font-family:var(--f-display);font-weight:700;font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--grain);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);max-width:68ch}
+
+/* contact */
+.contact{display:grid;gap:22px;justify-items:start}
+.contact>*{max-width:760px}
+.contact h2{font-size:clamp(2rem,5vw,3.4rem)}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-family:var(--f-mono);font-size:1.05rem;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;max-width:100%}
+.mail code{user-select:all;word-break:break-all}
+.copied{font-size:.85rem;color:var(--sig);min-height:1.2em}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </style>
 </head>
-<body><div class="w">
-<header>
-<h1>Mahakosh <span>Silicon</span></h1>
-<p class="t">Verified silicon, delivered. We help small chip and FPGA teams find bugs before tape-out, with UVM and cocotb testbenches, coverage closure and formal checks, at startup-friendly prices.</p>
-<a class="btn" href="mailto:mahakosh.silicon@gmail.com?subject=Free%20verification%20health%20check">Get a free 1-week verification health check</a>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Neesil home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="22" height="22" rx="5" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M14 7.5l5 4.5-5 8.5-5-8.5z" fill="var(--grain)"/><path d="M9 12h10M14 7.5v13" stroke="var(--paper)" stroke-width="1"/><g stroke="var(--ink)" stroke-width="2"><path d="M9 0v3M14 0v3M19 0v3M9 25v3M14 25v3M19 25v3M0 9h3M0 14h3M0 19h3M25 9h3M25 14h3M25 19h3"/></g></svg>
+      Neesil
+    </a>
+    <div class="links">
+      <a href="#work">What we do</a>
+      <a href="#how">How it works</a>
+      <a href="#open">Open source</a>
+      <a href="#academy">Academy</a>
+    </div>
+    <a class="btn primary small" href="#contact">Talk to us</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Chip verification · Made in India</p>
+      <h1 style="margin-top:14px">We find the bug <em>before</em> your silicon does.</h1>
+      <p class="lede">Neesil is a small verification team. We write your testbenches, chase coverage to the last bin, and sit with your RTL until it gets boring. Boring silicon is the kind that works on the first try.</p>
+      <div class="cta">
+        <a class="btn primary" href="#contact">Get a free 1-week health check</a>
+        <a class="btn ghost" href="#open">See our open-source work</a>
+      </div>
+      <p class="hello">Hi, I'm Maneesh. You'll talk to me directly, not to a sales team.</p>
+    </div>
+
+    <figure class="scope" style="margin:0" aria-label="Waveform showing an assertion catching a byte-strobe bug">
+      <div class="scope-bar"><span><b>apb_regfile</b> · sim.vcd</span><span>t = 3710 ns</span></div>
+      <div class="scope-body"><svg id="wave" viewBox="0 0 520 250" role="img" aria-hidden="true"></svg></div>
+      <div class="scope-log pop">
+        <div class="err">✗ READ mismatch addr=0x0c got=0x0000a5ef exp=0x00a5a5ef</div>
+        <div class="ok">✓ bug caught in sim · tape-out saved</div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b>14%</b><span>of chip projects worked on first silicon in 2024, the lowest in over 20 years.</span><small>Wilson Research Group / Siemens EDA</small></div>
+      <div class="fact"><b>60–70%</b><span>of chip engineering effort goes into verification.</span><small>Siemens EDA, 2025</small></div>
+      <div class="fact"><b>1 bug</b><span>missed before tape-out can cost a full mask set. At advanced nodes that's millions of dollars.</span><small>Why we exist</small></div>
+    </div>
+  </div>
 </header>
-<div class="s">
-<div><b>14%</b>of chip projects got first-silicon success in 2024</div>
-<div><b>60–70%</b>of chip engineering effort is verification</div>
-</div>
-<div class="g">
-<div class="c"><h3>Verification services</h3>Testbench architecture, UVM &amp; cocotb environments, constrained-random stimulus, functional coverage closure, regression setup, assertion and formal checks, bug triage.</div>
-<div class="c"><h3>VeriKosh VIP library</h3>Open-source verification IP for APB, I2C, SPI, UART and AXI4-Lite, with coverage models and docs. <a href="https://github.com/mahakos/verikosh" style="color:var(--acc)">See it on GitHub</a>.</div>
-<div class="c"><h3>Mahakosh Academy</h3>8-week, project-based “Job-ready Design Verification” cohorts: SystemVerilog, UVM, cocotb, formal, and a real VIP on your GitHub.</div>
-</div>
-<footer>© 2026 Mahakosh Silicon · India · <a href="mailto:mahakosh.silicon@gmail.com" style="color:var(--mut)">mahakosh.silicon@gmail.com</a></footer>
-</div></body></html>
+
+<section id="story">
+  <div class="wrap story">
+    <div class="word">
+      <span class="te" lang="te">నీ + silicon</span>
+      <span class="ro">nee·sil · noun</span>
+      <p><b lang="te">నీ</b> (nee) means <i>your</i> in Telugu. Neesil means <i>your silicon</i>.</p>
+    </div>
+    <div class="story-text">
+      <p class="eyebrow">Why "Neesil"</p>
+      <h2>Your silicon. Checked like it's ours.</h2>
+      <p>Neesil is my name, Maneesh, folded into silicon. It also happens to say "your silicon" in Telugu, and that is exactly how we work. Your chip is your team's months of effort, your funding and your deadline. We treat every block you send us as if our own name were printed on the die.</p>
+      <p>I started Neesil because small chip teams in India and around the world are building great designs with very few people. They rarely have a full verification team or a budget for every EDA licence. That's where bugs slip through. We want to be the verification team they can afford.</p>
+      <p class="sign">Maneesh Jonnala<span>Founder, VLSI engineer</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">What we do</p>
+      <h2>Verification you can hand off and stop worrying about.</h2>
+      <p class="lede">Pick one block or hand us the whole regression. You get working testbenches, clear coverage numbers and a weekly note in plain English.</p>
+    </div>
+    <div class="services">
+      <article class="svc">
+        <span class="tag">UVM · cocotb · SystemVerilog</span>
+        <h3>Testbench build</h3>
+        <p>We build the environment around your design, from scratch or on top of what you have.</p>
+        <ul><li>Agents, drivers, monitors, scoreboards</li><li>Reference models in Python or SV</li><li>Runs on your simulator or ours</li></ul>
+      </article>
+      <article class="svc">
+        <span class="tag">Coverage closure</span>
+        <h3>Coverage and bug hunting</h3>
+        <p>Your tests pass but you're not sure they test enough. We find the holes and close them.</p>
+        <ul><li>Functional coverage plans</li><li>Constrained-random stimulus</li><li>Bug triage with waveforms and root cause</li></ul>
+      </article>
+      <article class="svc">
+        <span class="tag">SVA · SymbiYosys</span>
+        <h3>Assertions and formal</h3>
+        <p>Some bugs never show up in random sims. Formal proofs catch them early.</p>
+        <ul><li>Protocol assertions (APB, AXI, SPI, I2C)</li><li>Formal property checks</li><li>CI regression on every commit</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">How it works</p>
+      <h2>Start small. Pay only when you see the value.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="when">Week 1 · free</span><h3>Health check</h3><p>Share one block and its spec under NDA. We review your current tests and send a short report: what's covered, what's missing, and where we'd look for bugs first.</p></div>
+      <div class="step"><span class="when">Week 2</span><h3>Fixed-price plan</h3><p>If the report is useful, we quote a fixed price per block or a monthly retainer. No hourly surprises. Half up front, half on delivery.</p></div>
+      <div class="step"><span class="when">Every week after</span><h3>Plain-English updates</h3><p>A short note each Friday: coverage numbers, bugs found, what's next. You can read it in two minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="open" style="background:var(--panel)">
+  <div class="wrap oss">
+    <pre class="term" aria-label="Terminal output of our APB testbench"><span class="p">$</span> git clone github.com/mahakos/verikosh
+<span class="p">$</span> cd apb/tb && make SEED=1234
+  directed_write_read     <span class="g">PASS</span>
+  error_responses         <span class="g">PASS</span>
+  constrained_random      <span class="g">PASS</span>
+  coverage                <span class="g">36/36 bins · 100%</span>
+<span class="g">TESTS=3 PASS=3 FAIL=0</span></pre>
+    <div class="oss-text">
+      <p class="eyebrow">Open source</p>
+      <h2>Don't trust us. Read our code.</h2>
+      <p>Our verification IP is free and public on GitHub. Clone it, run it, judge the quality yourself before you pay us anything. We test it the way we'd test yours: when we broke one byte-strobe bit in the RTL on purpose, the scoreboard caught it.</p>
+      <div class="chips"><span class="chip done">APB3 · ready</span><span class="chip">SPI · building</span><span class="chip">I2C · next</span><span class="chip">UART · next</span><span class="chip">AXI4-Lite · next</span></div>
+      <a class="btn ghost" style="justify-self:start" href="https://github.com/mahakos/verikosh">Open the repo on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="academy">
+  <div class="wrap">
+    <div class="academy">
+      <div class="academy-copy">
+        <p class="eyebrow">Neesil Academy</p>
+        <h2>Learn verification by doing real verification.</h2>
+        <p>An 8-week evening cohort for final-year ECE students and freshers. Small batches of 10, so you actually get time with a mentor. You finish with a working VIP on your own GitHub that you can show in any interview.</p>
+        <p>We won't promise you a job. We'll make sure you can do the job, and our best students get first call when we hire.</p>
+        <div class="price"><b>₹5,999</b><span>first batch · full refund in week 1 if it's not for you</span></div>
+        <a class="btn" href="#contact">Join the waitlist</a>
+      </div>
+      <div class="weeks" aria-label="Course plan">
+        <div><span>Week 1–2</span>SystemVerilog for verification, the parts you'll really use</div>
+        <div><span>Week 3–4</span>UVM: agents, sequences, scoreboards</div>
+        <div><span>Week 5</span>cocotb and Python testbenches</div>
+        <div><span>Week 6</span>Functional coverage and constrained random</div>
+        <div><span>Week 7</span>Assertions and a first taste of formal</div>
+        <div><span>Week 8</span>Your own VIP project, reviewed like real work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Questions people ask</p><h2>The honest answers.</h2></div>
+    <div class="faq">
+      <details><summary>You're a new company. Why should I trust you?</summary><p>Fair question. That's why the first week is free and our code is public. You see our work before you spend a rupee or a dollar.</p></details>
+      <details><summary>Will my RTL stay private?</summary><p>Yes. We sign your NDA before we see anything, work on your machines or VPN if you prefer, and never reuse client code in our open-source work.</p></details>
+      <details><summary>Do you need our commercial simulator licences?</summary><p>No. We can work fully on open-source tools, and we write UVM that runs on VCS, Xcelium or Questa when you have them.</p></details>
+      <details><summary>Do you work with teams outside India?</summary><p>Yes. We work remotely across time zones and keep a few hours of overlap with your team every day.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--grain-soft)">
+  <div class="wrap contact">
+    <p class="eyebrow">Say hello</p>
+    <h2>Send us one block. We'll tell you what we'd test first.</h2>
+    <p class="lede" style="color:var(--ink)">Write a few lines about your design and your deadline. Maneesh replies personally within one working day.</p>
+    <div class="mail"><code id="addr">hello.neesil@gmail.com</code><button class="btn primary small" id="copy" type="button">Copy email</button></div>
+    <p class="copied" id="copied" aria-live="polite"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>© 2026 Neesil · India</span><span><a href="https://github.com/mahakos/verikosh">GitHub</a></span></div>
+</footer>
+
+<script>
+(function(){
+  // Draw a small APB waveform: clk, psel, penable, pwrite, paddr, prdata, with a failing read highlighted.
+  var svg=document.getElementById('wave'), NS='http://www.w3.org/2000/svg';
+  function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t)e.textContent=t;svg.appendChild(e);return e}
+  var x0=80, cw=20, rows=['pclk','psel','penable','pwrite','paddr','prdata'], top=18, rh=36, H=12;
+  for(var g=0; g<=22; g++) el('line',{x1:x0+g*cw,y1:6,x2:x0+g*cw,y2:236,class:'grid'});
+  rows.forEach(function(r,i){el('text',{x:10,y:top+i*rh+H/2+4,class:'lbl'},r)});
+  function digital(bits,row){var y1=top+row*rh, y0=y1+H, d='M'+x0+','+(bits[0]?y1:y0);
+    bits.forEach(function(b,i){var y=b?y1:y0;d+=' L'+(x0+i*cw)+','+y+' L'+(x0+(i+1)*cw)+','+y});
+    el('path',{d:d,class:'w draw'})}
+  var clk=[];for(var i=0;i<44;i++)clk.push(i%2?0:1);
+  (function(){var y1=top,y0=top+H,d='M'+x0+','+y0;for(var i=0;i<44;i++){var y=clk[i]?y1:y0;d+=' L'+(x0+i*10)+','+y+' L'+(x0+(i+1)*10)+','+y}el('path',{d:d,class:'w draw'})})();
+  digital([0,1,1,0,1,1,0,1,1,0,1,1,0,0,1,1,0,0,0,0,0,0],1);
+  digital([0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0],2);
+  digital([0,1,1,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],3);
+  function bus(segs,row){var y=top+row*rh, m=y+H/2; segs.forEach(function(s){var a=x0+s[0]*cw,b=x0+s[1]*cw;
+      el('path',{d:'M'+a+','+m+' L'+(a+4)+','+y+' L'+(b-4)+','+y+' L'+b+','+m+' L'+(b-4)+','+(y+H)+' L'+(a+4)+','+(y+H)+' Z',class:'bus draw'});
+      if(s[2])el('text',{x:a+7,y:m+3.5,class:'bust'},s[2])})}
+  bus([[0,1,''],[1,4,'04'],[4,7,'08'],[7,10,'0c'],[10,14,'0c'],[14,17,'0c'],[17,22,'']],4);
+  bus([[0,11,''],[11,12,'—'],[12,15,''],[15,17,'0000a5ef'],[17,22,'']],5);
+  var cx=x0+16*cw;
+  el('rect',{x:x0+15*cw,y:top+5*rh-6,width:2*cw,height:H+12,class:'badbox pop',rx:3});
+  el('line',{x1:cx,y1:6,x2:cx,y2:236,class:'cursor pop'});
+  el('text',{x:x0+15*cw-118,y:top+5*rh+34,class:'badt pop'},'assert fail: byte 2 lost');
+})();
+document.getElementById('copy').addEventListener('click',function(){
+  var t=document.getElementById('addr').textContent, out=document.getElementById('copied');
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('addr'));var s=getSelection();s.removeAllRanges();s.addRange(r);out.textContent='Selected. Press Ctrl+C to copy.'}
+  try{navigator.clipboard.writeText(t).then(function(){out.textContent='Copied. We read every email.'},sel)}catch(e){sel()}
+});
+</script>
+</body>
+</html>
