@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sample health-check report · Neesil</title>
+<meta name="description" content="A sample Neesil verification health-check report, written on our own open-source APB3 register file and testbench. Real results: coverage, five planted bugs, and the gaps we found in our own tests.">
+<link rel="canonical" href="https://mahakos.github.io/mahakosh.github.io/report.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Neesil">
+<meta property="og:title" content="What a Neesil health check looks like">
+<meta property="og:description" content="A real one-week verification review, run on our own open-source APB3 design. Including the gaps we found in our own tests.">
+<meta property="og:url" content="https://mahakos.github.io/mahakosh.github.io/report.html">
+<meta property="og:image" content="https://mahakos.github.io/mahakosh.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14211C">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+Telugu:wght@700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Neesil home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="22" height="22" rx="5" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M14 7.5l5 4.5-5 8.5-5-8.5z" fill="var(--grain)"/><path d="M9 12h10M14 7.5v13" stroke="var(--paper)" stroke-width="1"/><g stroke="var(--ink)" stroke-width="2"><path d="M9 0v3M14 0v3M19 0v3M9 25v3M14 25v3M19 25v3M0 9h3M0 14h3M0 19h3M25 9h3M25 14h3M25 19h3"/></g></svg>
+      Neesil
+    </a>
+    <div class="links">
+      <a href="./#work">Services</a>
+      <a href="./#open">Open work</a>
+      <a href="report.html" aria-current="page">Sample report</a>
+      <a href="./#academy">Academy</a>
+    </div>
+    <a class="btn primary small" href="./#contact">Talk to Maneesh</a>
+  </div>
+</nav>
+
+<main id="main">
+<section style="padding-top:56px">
+  <div class="wrap doc">
+    <p class="eyebrow">Sample health-check report</p>
+    <h1 style="margin-top:12px">APB3 register file: verification health check</h1>
+    <p class="lede" style="margin-top:18px">This is the report format you get after a free one-week health check. We can't publish client work, so we ran the same review on our own open-source design and testbench, and we were as hard on our own tests as we would be on yours.</p>
+
+    <div class="banner">
+      <p><b>Everything here is reproducible.</b> Design: <a href="https://github.com/mahakos/verikosh/blob/main/apb/rtl/apb_regfile.v"><code>apb_regfile.v</code></a> (8 × 32-bit registers, byte strobes, PSLVERR). Testbench: <a href="https://github.com/mahakos/verikosh/tree/main/apb/tb">cocotb 2.x + Icarus Verilog</a>. Run <code>SEED=1234 make</code> in <code>apb/tb</code> to see the same numbers. Reviewed November 2026.</p>
+    </div>
+
+    <div class="meta" aria-label="Summary numbers">
+      <div><b>3/3</b><span>tests pass</span></div>
+      <div><b>100%</b><span>of 36 coverage bins hit</span></div>
+      <div><b>5/5</b><span>planted bugs detected</span></div>
+      <div><b>4</b><span>gaps found in our own tests</span></div>
+    </div>
+
+    <h2>1. Summary</h2>
+    <p>The testbench is in good shape for a v0.1. It has a real reference model and scoreboard, so it checks data instead of only checking that the simulation finished. Every one of five deliberately planted RTL bugs made at least one test fail.</p>
+    <p>But the 100% coverage number flatters it. Coverage closes in 100 to 200 random transactions across ten seeds, which tells us the coverage model is too small to be a good measure of "done". Three of the five planted bugs were caught only by random traffic, one of them partly by luck, and one was caught by a crash rather than a clear error message. The fixes are small, and they are listed in section 5.</p>
+
+    <h2>2. What exists today</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Component</th><th>Status</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Master driver</td><td class="ok">Good</td><td>Correct APB3 setup and access phases. Waits on PREADY, though that path has not run yet (F4).</td></tr>
+        <tr><td>Passive monitor</td><td class="warn">Needs work</td><td>Samples every completed access, but crashes on X/Z values (finding F1).</td></tr>
+        <tr><td>Reference model + scoreboard</td><td class="ok">Good</td><td>Models byte strobes and PSLVERR, checks every read and every error response.</td></tr>
+        <tr><td>Functional coverage</td><td class="warn">Too small</td><td>36 bins: direction × register, error kinds, all 16 strobe patterns. No crosses (F3).</td></tr>
+        <tr><td>Tests</td><td class="ok">Good</td><td>Directed write/read, error responses, constrained random until coverage closes.</td></tr>
+        <tr><td>Assertions / formal</td><td class="bad">Missing</td><td>No protocol assertions yet (F4).</td></tr>
+        <tr><td>CI</td><td class="ok">Good</td><td>GitHub Actions runs the regression on every push.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="mutations">3. Does the testbench catch real bugs?</h2>
+    <p>A passing test only matters if it would fail on a broken design. So we planted five bugs in the RTL, one at a time, and ran the full regression with seed 1234. This is called mutation testing, and it is the quickest honest way to measure a testbench.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Planted bug</th><th>Caught?</th><th>Caught by</th><th>How it showed up</th></tr></thead>
+      <tbody>
+        <tr><td>Byte 2 written using strobe bit 1 instead of bit 2</td><td class="ok">Yes</td><td>constrained_random</td><td><code>READ mismatch addr=0x0c got=0xeff35b61 exp=0xef005b61</code></td></tr>
+        <tr><td>Unaligned addresses accepted</td><td class="ok">Yes</td><td>error_responses</td><td><code>PSLVERR mismatch addr=0x01 got=False exp=True</code></td></tr>
+        <tr><td>Off-by-one range check (<code>&lt;=</code> instead of <code>&lt;</code>)</td><td class="ok">Yes</td><td>error_responses</td><td><code>PSLVERR mismatch addr=0x20 got=False exp=True</code></td></tr>
+        <tr><td>Registers reset to 1 instead of 0</td><td class="warn">Yes, by chance</td><td>constrained_random</td><td><code>READ mismatch addr=0x1c got=0x00000001 exp=0x00000000</code></td></tr>
+        <tr><td>Read data driven during an error response</td><td class="warn">Yes, as a crash</td><td>constrained_random</td><td>Python <code>ValueError</code> on an X value, not a checker message</td></tr>
+      </tbody>
+    </table></div>
+    <p style="margin-top:14px">The directed tests alone caught only two of the five. That is normal, and it is why random stimulus with a scoreboard matters. It is also why the next findings focus on making the random side stronger.</p>
+
+    <h2>4. Findings</h2>
+
+    <div class="finding md">
+      <h3><span class="sev warn">Medium</span> F1. The monitor crashes on unknown (X) values</h3>
+      <p>When the design drove an undefined value on PRDATA, the monitor's integer conversion raised a Python exception. The test failed, which is good, but the log points at the testbench instead of the design. On a real project this costs an engineer an hour of confusion each time.</p>
+      <p><b>Fix:</b> check <code>is_resolvable</code> before converting, and report <code>X on PRDATA at addr=…</code> as a scoreboard error.</p>
+    </div>
+
+    <div class="finding md">
+      <h3><span class="sev warn">Medium</span> F2. Reset values are not checked on purpose</h3>
+      <p>No test reads registers straight after reset before writing them. The reset bug was caught only because a random read happened to hit an unwritten register. With a different seed or a larger register file, it could slip through.</p>
+      <p><b>Fix:</b> a directed reset-value test, and a coverage bin for "read before first write" on every register.</p>
+    </div>
+
+    <div class="finding md">
+      <h3><span class="sev warn">Medium</span> F3. 100% coverage is too easy to reach</h3>
+      <p>Coverage closes in 100 to 200 transactions on all ten seeds we tried (1 to 10). The model counts each feature on its own, so it never asks whether every strobe pattern was used on every register, or whether a partial write was followed by a read that would show the result.</p>
+      <p><b>Fix:</b> add crosses (register × strobe pattern, write-then-read on the same register, back-to-back accesses) and check for closure after every transaction instead of every 100.</p>
+    </div>
+
+    <div class="finding lo">
+      <h3><span class="sev ok">Low</span> F4. No wait states and no protocol assertions</h3>
+      <p>The design ties PREADY high, so the driver's wait-state path has never run. There are also no assertions on APB rules such as "PADDR stays stable while PSEL is high" or "PENABLE only rises one cycle after PSEL".</p>
+      <p><b>Fix:</b> a version of the design with random wait states, and a small set of SVA or cocotb protocol checks, ideally also proven with SymbiYosys.</p>
+    </div>
+
+    <h2>5. What we'd do next</h2>
+    <ol>
+      <li>Fix F1 and F2 first. Both are under a day of work and make every future failure easier to debug.</li>
+      <li>Rebuild the coverage model with crosses (F3) and re-run the five planted bugs to confirm they are now caught on purpose, not by chance.</li>
+      <li>Add wait states and protocol assertions (F4), then a formal run on the handshake.</li>
+    </ol>
+    <p>For a client block, this section turns into a fixed-price quote: what we would build, how long it takes, and what it costs. You decide whether to go ahead. The report is yours either way.</p>
+
+    <div class="banner noprint" style="margin-top:48px">
+      <p><b>Want this for one of your blocks?</b> The first three teams get the health check free. Send a few lines about the design to <a href="mailto:hello.neesil@gmail.com?subject=Verification%20health%20check">hello.neesil@gmail.com</a> and Maneesh will reply within one working day.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Neesil · Telangana, India · Udyam-registered MSME</span><span><a href="./">Home</a> · <a href="https://github.com/mahakos/verikosh">GitHub</a> · <a href="mailto:hello.neesil@gmail.com">Email</a></span></div>
+</footer>
+</body>
+</html>

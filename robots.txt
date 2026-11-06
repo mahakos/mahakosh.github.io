@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mahakos.github.io/mahakosh.github.io/sitemap.xml
