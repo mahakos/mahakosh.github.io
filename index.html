@@ -65,7 +65,7 @@
           <div class="ok">✓ bug caught in simulation, not in silicon</div>
         </div>
       </figure>
-      <p class="scope-cap">A real failure from our open APB3 testbench, after we broke one byte-strobe line in the RTL on purpose. <a href="report.html#mutations">How we test our own tests</a>.</p>
+      <p class="scope-cap">A real failure from the first version of our open APB3 testbench, after we broke one byte-strobe line in the RTL on purpose. <a href="report.html#mutations">How we test our own tests</a>.</p>
     </div>
   </div>
 
@@ -149,35 +149,49 @@
     <div class="head">
       <p class="eyebrow">Open work</p>
       <h2>Don't trust us. Run our code.</h2>
-      <p class="lede">Our verification IP is free and public. Clone it, run it and judge the quality before you pay anything. Every number below comes from running the code, not from a slide.</p>
+      <p class="lede">Our verification IP is free and public. Clone it, run it and judge the quality before you pay anything. Five blocks so far, 36 deliberately planted bugs, all 36 caught. Every number below comes from running the code, not from a slide.</p>
     </div>
     <div class="projects" id="projects">
       <article class="proj lead">
         <div style="display:grid;gap:12px">
-          <div class="proj-top"><h3>APB3 verification IP</h3><span class="status live">v0.1 · live</span></div>
-          <p>A complete cocotb environment for an APB3 register file: master driver, passive monitor, register model, scoreboard and a 36-bin functional coverage model. Constrained-random traffic runs until coverage hits 100%.</p>
-          <ul class="stats"><li><b>3/3</b> tests pass</li><li><b>36/36</b> coverage bins</li><li><b>5/5</b> planted bugs caught</li><li>CI on every push</li></ul>
+          <div class="proj-top"><h3>APB3 verification IP</h3><span class="status live">v0.2 · live</span></div>
+          <p>A complete cocotb environment for an APB3 register file: master driver with random wait states, passive monitor, protocol checker, register model, scoreboard and a 158-bin coverage model with register × strobe crosses. Random traffic runs until coverage closes.</p>
+          <ul class="stats"><li><b>4/4</b> tests pass</li><li><b>158/158</b> coverage bins</li><li><b>8/8</b> planted bugs caught</li><li>CI on every push</li></ul>
           <div class="proj-links"><a class="btn ghost small" href="https://github.com/mahakos/verikosh/tree/main/apb">View code</a><a class="textlink" href="report.html">Read its health-check report</a></div>
         </div>
         <pre class="term" aria-label="Terminal output of our APB testbench"><span class="p">$</span> git clone https://github.com/mahakos/verikosh
-<span class="p">$</span> cd verikosh/apb/tb && SEED=1234 make
-  directed_write_read     <span class="g">PASS</span>
-  error_responses         <span class="g">PASS</span>
-  constrained_random      <span class="g">PASS</span>
-  200 txns · 0 errors · coverage 100%
-<span class="g">TESTS=3 PASS=3 FAIL=0</span></pre>
+<span class="p">$</span> cd verikosh/apb/tb && SEED=7 make
+  1900 txns · 0 errors · coverage 100%
+<span class="g">TESTS=4 PASS=4 FAIL=0</span>
+<span class="p">$</span> python3 tools/mutate.py
+<span class="g">Mutation score: 36/36 (100%)</span></pre>
       </article>
       <article class="proj">
-        <div class="proj-top"><h3>SPI, I2C and UART VIP</h3><span class="status">in progress</span></div>
-        <p>The serial interfaces almost every SoC and FPGA board has. Same structure as APB3: driver, monitor, scoreboard, coverage and a reference design to test against.</p>
-        <a class="textlink" href="https://github.com/mahakos/verikosh">Follow the repo</a>
+        <div class="proj-top"><h3>AXI4-Lite VIP + formal</h3><span class="status live">live</span></div>
+        <p>Independent write address and data channels, random back-pressure, a protocol checker, and a SymbiYosys proof of the handshake rules (BMC plus k-induction). Two of the planted bugs were caught only by the proof.</p>
+        <ul class="stats"><li><b>4/4</b> tests</li><li><b>76/76</b> bins</li><li><b>8/8</b> bugs caught</li></ul>
+        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/axi4lite">View code</a>
       </article>
       <article class="proj">
-        <div class="proj-top"><h3>AXI4-Lite with formal</h3><span class="status">planned</span></div>
-        <p>Simulation VIP plus SymbiYosys properties that prove the handshake rules, so protocol bugs are caught by proof as well as by random tests.</p>
-        <a class="textlink" href="https://github.com/mahakos/verikosh">Follow the repo</a>
+        <div class="proj-top"><h3>Sync FIFO, formally proven</h3><span class="status live">live</span></div>
+        <p>A full k-induction proof of a synchronous FIFO, including data integrity: what goes in comes out, in order, with no overflow or underflow. No simulation needed.</p>
+        <ul class="stats"><li><b>3/3</b> covers reached</li><li><b>5/5</b> bugs caught</li></ul>
+        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/fifo">View code</a>
+      </article>
+      <article class="proj">
+        <div class="proj-top"><h3>UART VIP</h3><span class="status live">live</span></div>
+        <p>Checks parity, framing errors, BREAK, start-bit glitches and ±2% baud-rate skew, across random divisors and parity modes.</p>
+        <ul class="stats"><li><b>4/4</b> tests</li><li><b>37/37</b> bins</li><li><b>8/8</b> bugs caught</li></ul>
+        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/uart">View code</a>
+      </article>
+      <article class="proj">
+        <div class="proj-top"><h3>SPI master VIP</h3><span class="status live">live</span></div>
+        <p>All four SPI modes, MSB- and LSB-first, a reactive slave model and a setup, hold and timing checker on every frame.</p>
+        <ul class="stats"><li><b>3/3</b> tests</li><li><b>33/33</b> bins</li><li><b>7/7</b> bugs caught</li></ul>
+        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/spi">View code</a>
       </article>
     </div>
+    <p style="margin-top:24px;color:var(--muted)">Every block is lint-clean under <code style="font-family:var(--f-mono)">verilator -Wall</code>, and CI runs lint, simulation on three seeds, the formal proofs and the full mutation run on every push. <a class="textlink" href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See all 36 planted bugs</a>.</p>
   </div>
 </section>
 

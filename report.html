@@ -47,7 +47,11 @@
     <p class="lede" style="margin-top:18px">This is the report format you get after a free one-week health check. We can't publish client work, so we ran the same review on our own open-source design and testbench, and we were as hard on our own tests as we would be on yours.</p>
 
     <div class="banner">
-      <p><b>Everything here is reproducible.</b> Design: <a href="https://github.com/mahakos/verikosh/blob/main/apb/rtl/apb_regfile.v"><code>apb_regfile.v</code></a> (8 × 32-bit registers, byte strobes, PSLVERR). Testbench: <a href="https://github.com/mahakos/verikosh/tree/main/apb/tb">cocotb 2.x + Icarus Verilog</a>. Run <code>SEED=1234 make</code> in <code>apb/tb</code> to see the same numbers. Reviewed November 2026.</p>
+      <p><b>Everything here is reproducible.</b> Design: <a href="https://github.com/mahakos/verikosh/blob/171612d/apb/rtl/apb_regfile.v"><code>apb_regfile.v</code></a> (8 × 32-bit registers, byte strobes, PSLVERR). Testbench: <a href="https://github.com/mahakos/verikosh/tree/171612d/apb/tb">cocotb 2.x + Icarus Verilog</a>, at commit <code>171612d</code>. Check out that commit and run <code>SEED=1234 make</code> in <code>apb/tb</code> to see the same numbers. Reviewed November 2026 on v0.1 of the testbench.</p>
+    </div>
+
+    <div class="banner" style="background:var(--panel);border:1px solid var(--sig)">
+      <p><b class="ok">Update: all four gaps are fixed in v0.2.</b> We did what this report recommends. The APB3 testbench now has a clean X/Z check (F1), a reset-value test (F2), 158 coverage bins with register × strobe crosses that take about 1,000 to 2,000 transfers to close (F3), and random wait states with a protocol checker and hang timeout (F4). Eight planted bugs are now caught, up from five. The report below is the original v0.1 review, kept as it was so you can see the before and after. <a href="https://github.com/mahakos/verikosh/tree/main/apb">See v0.2</a>.</p>
     </div>
 
     <div class="meta" aria-label="Summary numbers">
