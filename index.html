@@ -13,11 +13,11 @@
 <meta property="og:url" content="https://mahakos.github.io/mahakosh.github.io/">
 <meta property="og:image" content="https://mahakos.github.io/mahakosh.github.io/assets/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#14211C">
+<meta name="theme-color" content="#13161d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+Telugu:wght@700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;500;800&family=Noto+Sans+Telugu:wght@700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Neesil","url":"https://mahakos.github.io/mahakosh.github.io/","email":"hello.neesil@gmail.com","description":"Chip design verification services: UVM and cocotb testbenches, functional coverage closure, SystemVerilog assertions, formal checks and bug triage.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressRegion":"Telangana","addressCountry":"IN"},"founder":{"@type":"Person","name":"Maneesh Jonnala"},"sameAs":["https://github.com/mahakos/verikosh"]}
@@ -26,197 +26,194 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<nav aria-label="Main">
-  <div class="wrap">
+<div class="notice">
+  <div class="container">
+    <span>The first three teams get a one-week health check free.</span>
+    <span>Telangana, India. Working remotely with teams anywhere.</span>
+  </div>
+</div>
+
+<header class="bar">
+  <div class="container">
     <a class="brand" href="#top" aria-label="Neesil home">
-      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="22" height="22" rx="5" fill="none" stroke="var(--ink)" stroke-width="2"/><path d="M14 7.5l5 4.5-5 8.5-5-8.5z" fill="var(--grain)"/><path d="M9 12h10M14 7.5v13" stroke="var(--paper)" stroke-width="1"/><g stroke="var(--ink)" stroke-width="2"><path d="M9 0v3M14 0v3M19 0v3M9 25v3M14 25v3M19 25v3M0 9h3M0 14h3M0 19h3M25 9h3M25 14h3M25 19h3"/></g></svg>
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 7.5l5 4.5-5 8.5-5-8.5z" fill="currentColor"/><g stroke="currentColor" stroke-width="2"><path d="M9 0v3M14 0v3M19 0v3M9 25v3M14 25v3M19 25v3M0 9h3M0 14h3M0 19h3M25 9h3M25 14h3M25 19h3"/></g></svg>
       Neesil
     </a>
-    <div class="links">
+    <nav aria-label="Main">
       <a href="#work">Services</a>
       <a href="#open">Open work</a>
       <a href="report.html">Sample report</a>
       <a href="#how">How it works</a>
-    </div>
-    <a class="btn primary small" href="#contact">Talk to Maneesh</a>
-  </div>
-</nav>
-
-<main id="main">
-<header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">Chip verification · Telangana, India · Remote worldwide</p>
-      <h1 style="margin-top:14px">We find the bug <em>before</em> your silicon does.</h1>
-      <p class="lede">Neesil is a founder-led verification studio for small chip and FPGA teams. I build your testbenches in UVM or cocotb, close coverage to the last bin, and stay with your RTL until the regressions get boring. Boring silicon is the kind that works the first time.</p>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Book a free 1-week health check</a>
-        <a class="btn ghost" href="report.html">See a sample report</a>
-      </div>
-      <p class="hello">Hi, I'm Maneesh. You talk to the engineer doing the work, not a sales team.</p>
-    </div>
-
-    <div>
-      <figure class="scope" style="margin:0" aria-label="Waveform from our APB3 testbench, where the scoreboard catches a byte-strobe bug">
-        <div class="scope-bar"><span><b>apb_regfile</b> · seed 1234</span><span>t = 1470 ns</span></div>
-        <div class="scope-body"><svg id="wave" viewBox="0 0 520 250" role="img" aria-hidden="true"></svg></div>
-        <div class="scope-log pop">
-          <div class="err">✗ READ mismatch addr=0x0c got=0xeff35b61 exp=0xef005b61</div>
-          <div class="ok">✓ bug caught in simulation, not in silicon</div>
-        </div>
-      </figure>
-      <p class="scope-cap">A real failure from the first version of our open APB3 testbench, after we broke one byte-strobe line in the RTL on purpose. <a href="report.html#mutations">How we test our own tests</a>.</p>
-    </div>
-  </div>
-
-  <div class="facts">
-    <div class="wrap">
-      <div class="fact"><b>14%</b><span>of IC/ASIC projects got working first silicon in 2024, the lowest figure in the study's history.</span><small><a href="https://verificationacademy.com/topics/planning-measurement-and-analysis/wrg-industry-data-and-trends/2024-siemens-eda-and-wilson-research-group-ic-asic-functional-verification-trend-report/">Wilson Research Group / Siemens EDA, 2024</a></small></div>
-      <div class="fact"><b>60–70%</b><span>of chip engineering effort goes into verification, yet small teams rarely have a dedicated verification engineer.</span><small>Industry estimate, Siemens EDA</small></div>
-      <div class="fact"><b>1 week</b><span>is all it takes to learn whether your current tests would catch the bugs that matter. Free for the first three teams.</span><small>Our offer</small></div>
-    </div>
+      <a class="btn btn--primary btn--small" href="#contact">Talk to Maneesh</a>
+    </nav>
   </div>
 </header>
 
-<section id="for" style="padding-bottom:0">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">Who we work with</p>
-      <h2>Small teams with real tape-outs and not enough testers.</h2>
-    </div>
-    <div class="for">
-      <div><h3>Chip startups</h3><p>Your designers are also your verifiers, and the tape-out date is fixed. We take one block or the whole regression so your team can keep designing.</p></div>
-      <div><h3>FPGA and product teams</h3><p>The bitstream "mostly works" and field bugs are expensive. We add a proper testbench, coverage numbers and CI so every change is checked.</p></div>
-      <div><h3>Design-services firms</h3><p>A project spike hits when everyone is booked. We pick up verification as overflow help, under your NDA and your name, at a fixed price.</p></div>
+<main id="main">
+<section class="hero" id="top">
+  <div class="container">
+    <figure class="scope" aria-label="Waveform from our APB3 testbench, where the scoreboard catches a byte-strobe bug">
+      <div class="scope-head"><span><b>apb_regfile</b>, seed 1234</span><span>t = 1470 ns</span></div>
+      <div class="scope-body"><svg id="wave" viewBox="0 0 1300 206" role="img" aria-hidden="true"></svg></div>
+      <div class="scope-log">
+        <span class="err">READ mismatch addr=0x0c got=0xeff35b61 exp=0xef005b61</span>
+        <span class="ok">Caught in simulation, months before silicon.</span>
+      </div>
+    </figure>
+    <p class="scope-cap">A real failure from the first version of our open APB3 testbench, after we broke one byte-strobe line in the RTL on purpose. <a href="report.html#mutations">How we test our own tests</a>.</p>
+
+    <div class="grid ledge">
+      <h1>We find the bug before your silicon does.</h1>
+      <p class="lead">Founder-led chip verification for small chip and FPGA teams.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#contact">Book a free health check</a>
+        <a class="btn" href="report.html">See a sample report</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="work">
-  <div class="wrap">
+<section class="who" id="for">
+  <div class="container grid">
     <div class="head">
-      <p class="eyebrow">Services</p>
-      <h2>Verification you can hand off and stop worrying about.</h2>
-      <p class="lede">Pick one block or hand over the whole regression. You get working testbenches, honest coverage numbers and a short note every Friday in plain English.</p>
+      <h2>Who do you work with?</h2>
+      <p class="lead">Small teams with real tape-outs and not enough testers.</p>
+      <div class="plate">
+        <div class="fig">
+          <span class="figure">14%</span>
+          <p>of IC/ASIC projects got working first silicon in 2024, the lowest figure in the study’s history.</p>
+          <small><a href="https://verificationacademy.com/topics/planning-measurement-and-analysis/wrg-industry-data-and-trends/2024-siemens-eda-and-wilson-research-group-ic-asic-functional-verification-trend-report/">Wilson Research Group and Siemens EDA, 2024</a></small>
+        </div>
+        <div class="fig">
+          <span class="figure">60 to 70%</span>
+          <p>of chip engineering effort goes into verification, yet small teams rarely have a dedicated verification engineer.</p>
+          <small>Industry estimate, Siemens EDA</small>
+        </div>
+      </div>
     </div>
-    <div class="services">
+    <ul class="rows">
+      <li><h3>Chip startups</h3><p>Your designers are also your verifiers, and the tape-out date is fixed. We take one block or the whole regression so your team can keep designing.</p></li>
+      <li><h3>FPGA and product teams</h3><p>The bitstream “mostly works” and field bugs are expensive. We add a proper testbench, coverage numbers and CI so every change is checked.</p></li>
+      <li><h3>Design-services firms</h3><p>A project spike hits when everyone is booked. We pick up verification as overflow help, under your NDA and your name, at a fixed price.</p></li>
+      <li><h3>Who does the work</h3><p>I do. I’m Maneesh, and I build your testbenches in UVM or cocotb, close coverage to the last bin, and stay with your RTL until the regressions get boring. The engineer you email is the one writing your tests.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="container grid">
+    <div class="head">
+      <h2>What do you check?</h2>
+      <p class="lead">Pick one block or hand over the whole regression. You get working testbenches, honest coverage numbers and a short note every Friday in plain English.</p>
+      <h3 class="gets-title">Every engagement includes</h3>
+      <ul class="gets">
+        <li>A written test plan you can review before any code is written</li>
+        <li>Testbench source in your repository, yours to keep</li>
+        <li>A coverage report with every hole explained, beyond the percentage</li>
+        <li>Bug reports with a failing seed, waveform and suggested fix</li>
+        <li>A one-command regression your team can run without us</li>
+        <li>A Friday note: what was checked, what broke, what’s next</li>
+      </ul>
+    </div>
+    <div class="svc-list">
       <article class="svc">
-        <span class="tag">UVM · cocotb · SystemVerilog</span>
+        <span class="tools">UVM, cocotb, SystemVerilog</span>
         <h3>Testbench build</h3>
         <p>An environment around your design, from scratch or on top of what you already have.</p>
         <ul><li>Agents, drivers, monitors, scoreboards</li><li>Reference models in Python or SystemVerilog</li><li>Runs on your simulator, or fully on open-source tools</li></ul>
       </article>
       <article class="svc">
-        <span class="tag">Coverage closure</span>
+        <span class="tools">Coverage closure</span>
         <h3>Coverage and bug hunting</h3>
         <p>Your tests pass, but do they test enough? We find the holes and close them.</p>
         <ul><li>Verification plan tied to the spec</li><li>Functional coverage and constrained-random stimulus</li><li>Bug triage with waveforms and a root cause</li></ul>
       </article>
       <article class="svc">
-        <span class="tag">SVA · SymbiYosys</span>
+        <span class="tools">SVA, SymbiYosys</span>
         <h3>Assertions and formal</h3>
         <p>Some bugs never show up in random simulation. Properties catch them early.</p>
         <ul><li>Protocol assertions for APB, AXI, SPI, I2C</li><li>Formal property checks on control logic</li><li>CI regression on every commit</li></ul>
       </article>
     </div>
-    <ul class="gets" aria-label="What every engagement includes">
-      <li>A written test plan you can review before any code is written</li>
-      <li>Testbench source in your repository, yours to keep</li>
-      <li>Coverage report with every hole explained, not just a percentage</li>
-      <li>Bug reports with a failing seed, waveform and suggested fix</li>
-      <li>A one-command regression your team can run without us</li>
-      <li>A Friday note: what was checked, what broke, what's next</li>
-    </ul>
   </div>
 </section>
 
-<section id="how" style="background:var(--panel)">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">How it works</p>
-      <h2>Start small. Pay only when you see the value.</h2>
+<section class="band on-ink" id="open">
+  <div class="container">
+    <div class="grid split-head">
+      <h2>Can I see your work before paying?</h2>
+      <p class="lead">Yes. Our verification IP is free and public, so you can clone it, run it and judge it first. Five blocks so far, 36 planted bugs, all 36 caught. Every number below comes from running the code.</p>
     </div>
-    <div class="steps">
-      <div class="step" style="background:var(--paper)"><span class="when">Week 1 · free</span><h3>Health check</h3><p>Share one block and its spec under NDA. We review your current tests and send a short report: what's covered, what's missing, and where we'd look for bugs first. <a class="textlink" href="report.html">This is what it looks like.</a></p></div>
-      <div class="step" style="background:var(--paper)"><span class="when">Week 2</span><h3>Fixed-price plan</h3><p>If the report helped, we quote a fixed price per block or a monthly retainer. No hourly surprises. Half up front, half on delivery.</p></div>
-      <div class="step" style="background:var(--paper)"><span class="when">Every week after</span><h3>Plain-English updates</h3><p>A short note each Friday with coverage numbers, bugs found and what's next. Two minutes to read.</p></div>
+    <div class="board-wrap" id="projects">
+      <table class="board">
+        <caption class="visually-hidden">Results from our open verification IP</caption>
+        <thead><tr><th scope="col">Block</th><th scope="col" class="num">Tests</th><th scope="col" class="num">Coverage bins</th><th scope="col" class="num">Planted bugs caught</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/apb">APB3 verification IP</a><span class="desc">Master driver with random wait states, passive monitor, protocol checker, register model, scoreboard and register × strobe crosses.</span></td><td class="num">4/4</td><td class="num">158/158</td><td class="num">8/8</td><td class="ver">v0.2, live</td></tr>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/axi4lite">AXI4-Lite VIP + formal</a><span class="desc">Random back-pressure and a SymbiYosys proof of the handshake rules. Two planted bugs were caught only by the proof.</span></td><td class="num">4/4</td><td class="num">76/76</td><td class="num">8/8</td><td class="ver">live</td></tr>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/fifo">Sync FIFO, formally proven</a><span class="desc">A k-induction proof that what goes in comes out, in order, with no overflow or underflow. All 3 covers reached.</span></td><td class="num na">proof</td><td class="num na">formal</td><td class="num">5/5</td><td class="ver">live</td></tr>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/uart">UART verification IP</a><span class="desc">Parity, framing errors, BREAK, start-bit glitches and ±2% baud-rate skew across random divisors.</span></td><td class="num">4/4</td><td class="num">37/37</td><td class="num">8/8</td><td class="ver">live</td></tr>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/spi">SPI master VIP</a><span class="desc">All four SPI modes, MSB- and LSB-first, a reactive slave model and a timing checker on every frame.</span></td><td class="num">3/3</td><td class="num">33/33</td><td class="num">7/7</td><td class="ver">live</td></tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-</section>
 
-<section id="open">
-  <div class="wrap">
-    <div class="head">
-      <p class="eyebrow">Open work</p>
-      <h2>Don't trust us. Run our code.</h2>
-      <p class="lede">Our verification IP is free and public. Clone it, run it and judge the quality before you pay anything. Five blocks so far, 36 deliberately planted bugs, all 36 caught. Every number below comes from running the code, not from a slide.</p>
-    </div>
-    <div class="projects" id="projects">
-      <article class="proj lead">
-        <div style="display:grid;gap:12px">
-          <div class="proj-top"><h3>APB3 verification IP</h3><span class="status live">v0.2 · live</span></div>
-          <p>A complete cocotb environment for an APB3 register file: master driver with random wait states, passive monitor, protocol checker, register model, scoreboard and a 158-bin coverage model with register × strobe crosses. Random traffic runs until coverage closes.</p>
-          <ul class="stats"><li><b>4/4</b> tests pass</li><li><b>158/158</b> coverage bins</li><li><b>8/8</b> planted bugs caught</li><li>CI on every push</li></ul>
-          <div class="proj-links"><a class="btn ghost small" href="https://github.com/mahakos/verikosh/tree/main/apb">View code</a><a class="textlink" href="report.html">Read its health-check report</a></div>
-        </div>
-        <pre class="term" aria-label="Terminal output of our APB testbench"><span class="p">$</span> git clone https://github.com/mahakos/verikosh
+    <div class="grid case">
+      <div class="text">
+        <h3>Run the APB3 testbench yourself</h3>
+        <p>Random traffic runs until all 158 coverage bins close. Then the mutation script plants each bug in the RTL, one at a time, and checks that a test fails.</p>
+        <p><a class="btn btn--small" href="https://github.com/mahakos/verikosh/tree/main/apb">View code</a> <a href="report.html">Read its health-check report</a></p>
+      </div>
+      <pre class="term" aria-label="Terminal output of our APB testbench"><span class="p">$</span> git clone https://github.com/mahakos/verikosh
 <span class="p">$</span> cd verikosh/apb/tb && SEED=7 make
-  1900 txns · 0 errors · coverage 100%
+  1900 txns, 0 errors, coverage 100%
 <span class="g">TESTS=4 PASS=4 FAIL=0</span>
 <span class="p">$</span> python3 tools/mutate.py
 <span class="g">Mutation score: 36/36 (100%)</span></pre>
-      </article>
-      <article class="proj">
-        <div class="proj-top"><h3>AXI4-Lite VIP + formal</h3><span class="status live">live</span></div>
-        <p>Independent write address and data channels, random back-pressure, a protocol checker, and a SymbiYosys proof of the handshake rules (BMC plus k-induction). Two of the planted bugs were caught only by the proof.</p>
-        <ul class="stats"><li><b>4/4</b> tests</li><li><b>76/76</b> bins</li><li><b>8/8</b> bugs caught</li></ul>
-        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/axi4lite">View code</a>
-      </article>
-      <article class="proj">
-        <div class="proj-top"><h3>Sync FIFO, formally proven</h3><span class="status live">live</span></div>
-        <p>A full k-induction proof of a synchronous FIFO, including data integrity: what goes in comes out, in order, with no overflow or underflow. No simulation needed.</p>
-        <ul class="stats"><li><b>3/3</b> covers reached</li><li><b>5/5</b> bugs caught</li></ul>
-        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/fifo">View code</a>
-      </article>
-      <article class="proj">
-        <div class="proj-top"><h3>UART VIP</h3><span class="status live">live</span></div>
-        <p>Checks parity, framing errors, BREAK, start-bit glitches and ±2% baud-rate skew, across random divisors and parity modes.</p>
-        <ul class="stats"><li><b>4/4</b> tests</li><li><b>37/37</b> bins</li><li><b>8/8</b> bugs caught</li></ul>
-        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/uart">View code</a>
-      </article>
-      <article class="proj">
-        <div class="proj-top"><h3>SPI master VIP</h3><span class="status live">live</span></div>
-        <p>All four SPI modes, MSB- and LSB-first, a reactive slave model and a setup, hold and timing checker on every frame.</p>
-        <ul class="stats"><li><b>3/3</b> tests</li><li><b>33/33</b> bins</li><li><b>7/7</b> bugs caught</li></ul>
-        <a class="textlink" href="https://github.com/mahakos/verikosh/tree/main/spi">View code</a>
-      </article>
     </div>
-    <p style="margin-top:24px;color:var(--muted)">Every block is lint-clean under <code style="font-family:var(--f-mono)">verilator -Wall</code>, and CI runs lint, simulation on three seeds, the formal proofs and the full mutation run on every push. <a class="textlink" href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See all 36 planted bugs</a>.</p>
+    <p class="board-foot">Every block is lint-clean under <code>verilator -Wall</code>, and CI runs lint, simulation on three seeds, the formal proofs and the full mutation run on every push. <a href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See all 36 planted bugs</a>.</p>
   </div>
 </section>
 
-<section id="story" style="background:var(--panel)">
-  <div class="wrap story">
-    <div class="word" style="background:var(--paper)">
-      <span class="te" lang="te">నీ + silicon</span>
-      <span class="ro">nee·sil · noun</span>
-      <p><b lang="te">నీ</b> (nee) means <i>your</i> in Telugu. Neesil means <i>your silicon</i>.</p>
+<section id="how">
+  <div class="container">
+    <div class="grid split-head">
+      <h2>How does it start?</h2>
+      <p class="lead">Small. You pay only after you have seen what the work is worth.</p>
     </div>
-    <div class="story-text">
-      <p class="eyebrow">Why "Neesil"</p>
-      <h2>Your silicon. Checked like it's ours.</h2>
-      <p>Neesil is my name, Maneesh, folded into silicon. It also says "your silicon" in Telugu, which is how I want to work. Your chip is months of your team's effort, your funding and your deadline. I treat every block you send as if my own name were printed on the die.</p>
-      <p>I started Neesil because small chip teams in India and around the world are building great designs with very few people. They rarely have a full verification team or a licence for every EDA tool, and that is where bugs slip through. Neesil is new and founder-led: today you work with me directly, and the team grows only as fast as the quality can.</p>
-      <p class="sign">Maneesh Jonnala<span>Founder and verification engineer</span></p>
+    <ol class="steps">
+      <li><span class="when">Week 1<small>free</small></span><h3>Health check</h3><p>Share one block and its spec under NDA. We review your current tests and send a short report: what’s covered, what’s missing, and where we’d look for bugs first. <a href="report.html">This is what it looks like.</a></p></li>
+      <li><span class="when">Week 2<small>fixed price</small></span><h3>A quote you can plan around</h3><p>If the report helped, we quote a fixed price per block or a monthly retainer. No hourly surprises. Half up front, half on delivery.</p></li>
+      <li><span class="when">Friday<small>every week after</small></span><h3>Plain-English updates</h3><p>A short note each Friday with coverage numbers, bugs found and what’s next. Two minutes to read.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="story">
+  <div class="container grid story">
+    <div class="word">
+      <span class="te" lang="te">నీ + silicon</span>
+      <span class="ro">nee-sil, noun</span>
+      <p><b lang="te">నీ</b> (nee) means <i>your</i> in Telugu. Neesil means <i>your silicon</i>.</p>
+      <p class="tag">Your silicon. Checked like it’s ours.</p>
+    </div>
+    <div class="text">
+      <h2>Why the name Neesil?</h2>
+      <p>Neesil is my name, Maneesh, folded into silicon. It also says “your silicon” in Telugu, which is how I want to work. Your chip is months of your team’s effort, your funding and your deadline. I treat every block you send as if my own name were printed on the die.</p>
+      <p>I started Neesil because small chip teams in India and around the world are building good designs with very few people. They rarely have a full verification team or a licence for every EDA tool, and that is where bugs slip through. Neesil is new and founder-led: today you work with me directly, and the team grows only as fast as the quality can.</p>
+      <p class="sign">Maneesh Jonnala<small>Founder and verification engineer</small></p>
     </div>
   </div>
 </section>
 
 <section id="faq">
-  <div class="wrap">
-    <div class="head"><p class="eyebrow">Questions people ask</p><h2>The honest answers.</h2></div>
-    <div class="faq">
-      <details><summary>You're a new company. Why should I trust you?</summary><p>Fair question, and we won't pretend otherwise. That's why the first week is free and our code is public. You see the quality of the work before you spend a rupee or a dollar.</p></details>
+  <div class="container grid faq">
+    <div class="head">
+      <h2>Anything else?</h2>
+      <p class="lead">The questions people ask before sending a block.</p>
+    </div>
+    <div class="list">
+      <details><summary>You’re a new company. Why should I trust you?</summary><p>You shouldn’t have to take it on trust. The first week is free and our code is public, so you see the quality of the work before you spend a rupee or a dollar.</p></details>
       <details><summary>Will my RTL stay private?</summary><p>Yes. We sign a mutual NDA before we see anything (yours or ours), can work on your machines or VPN, and never reuse client code in our open-source work.</p></details>
       <details><summary>Do you need our commercial simulator licences?</summary><p>No. We can work fully on open-source tools like Icarus Verilog, Verilator, cocotb and SymbiYosys. When you have VCS, Xcelium or Questa, we write UVM that runs on them.</p></details>
       <details><summary>How is pricing decided?</summary><p>After the health check we quote a fixed price per block, or a monthly retainer for ongoing work. You know the cost before we start, and payment is split half up front and half on delivery.</p></details>
@@ -226,51 +223,68 @@
   </div>
 </section>
 
-<section id="contact" style="background:var(--grain-soft)">
-  <div class="wrap contact">
-    <p class="eyebrow">Say hello</p>
-    <h2>Send us one block. We'll tell you what we'd test first.</h2>
-    <p class="lede" style="color:var(--ink)">A few lines are enough. Maneesh replies personally within one working day. Useful things to mention:</p>
-    <ul class="include">
-      <li>What the block does and its main interfaces (AXI, APB, SPI, custom)</li>
-      <li>Rough size, and what tests exist today</li>
-      <li>Your simulator, or "none yet"</li>
-      <li>Your tape-out or release date</li>
-    </ul>
-    <div class="mail"><code id="addr">hello.neesil@gmail.com</code><a class="btn primary small" href="mailto:hello.neesil@gmail.com?subject=Verification%20health%20check">Write an email</a><button class="btn ghost small" id="copy" type="button">Copy address</button></div>
-    <p class="copied" id="copied" aria-live="polite"></p>
+<section id="contact">
+  <div class="container grid contact">
+    <div class="head">
+      <h2>Send us one block. We’ll tell you what we’d test first.</h2>
+      <p class="lead">A few lines are enough. Maneesh replies personally within one working day. Useful things to mention:</p>
+      <ul class="include">
+        <li>What the block does and its main interfaces (AXI, APB, SPI, custom)</li>
+        <li>Rough size, and what tests exist today</li>
+        <li>Your simulator, or “none yet”</li>
+        <li>Your tape-out or release date</li>
+      </ul>
+    </div>
+    <div class="mailbox">
+      <code class="addr" id="addr">hello.neesil@gmail.com</code>
+      <div class="row">
+        <a class="btn btn--primary" href="mailto:hello.neesil@gmail.com?subject=Verification%20health%20check">Write an email</a>
+        <button class="btn" id="copy" type="button">Copy address</button>
+      </div>
+      <p class="copied" id="copied" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 </main>
 
-<footer>
-  <div class="wrap"><span>© 2026 Neesil · Telangana, India · Udyam-registered MSME</span><span><a href="report.html">Sample report</a> · <a href="https://github.com/mahakos/verikosh">GitHub</a> · <a href="mailto:hello.neesil@gmail.com">Email</a></span></div>
+<footer class="mast">
+  <div class="container">
+    <p class="word-mark" aria-hidden="true">Neesil</p>
+    <div class="foot">
+      <span>© 2026 Neesil, Telangana, India. Udyam-registered MSME.</span>
+      <ul>
+        <li><a href="report.html">Sample report</a></li>
+        <li><a href="https://github.com/mahakos/verikosh">GitHub</a></li>
+        <li><a href="mailto:hello.neesil@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
 </footer>
 
 <script>
 (function(){
-  // Small APB waveform: pclk, psel, penable, pwrite, paddr, prdata, with the failing read highlighted.
+  // APB waveform: pclk, psel, penable, pwrite, paddr, prdata, with the failing read marked.
   var svg=document.getElementById('wave'), NS='http://www.w3.org/2000/svg';
   function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t)e.textContent=t;svg.appendChild(e);return e}
-  var x0=80, cw=20, rows=['pclk','psel','penable','pwrite','paddr','prdata'], top=18, rh=36, H=12;
-  for(var g=0; g<=22; g++) el('line',{x1:x0+g*cw,y1:6,x2:x0+g*cw,y2:236,class:'grid'});
-  rows.forEach(function(r,i){el('text',{x:10,y:top+i*rh+H/2+4,class:'lbl'},r)});
+  var x0=96, cw=54, rows=['pclk','psel','penable','pwrite','paddr','prdata'], top=12, rh=32, H=14;
+  for(var g=0; g<=22; g++) el('line',{x1:x0+g*cw,y1:4,x2:x0+g*cw,y2:194,class:'grid-line'});
+  rows.forEach(function(r,i){el('text',{x:0,y:top+i*rh+H/2+4,class:'lbl'},r)});
   function digital(bits,row){var y1=top+row*rh, y0=y1+H, d='M'+x0+','+(bits[0]?y1:y0);
     bits.forEach(function(b,i){var y=b?y1:y0;d+=' L'+(x0+i*cw)+','+y+' L'+(x0+(i+1)*cw)+','+y});
-    el('path',{d:d,class:'w draw'})}
-  (function(){var y1=top,y0=top+H,d='M'+x0+','+y0;for(var i=0;i<44;i++){var y=i%2?y0:y1;d+=' L'+(x0+i*10)+','+y+' L'+(x0+(i+1)*10)+','+y}el('path',{d:d,class:'w draw'})})();
+    el('path',{d:d,class:'w'})}
+  (function(){var y1=top,y0=top+H,d='M'+x0+','+y0;for(var i=0;i<44;i++){var y=i%2?y0:y1;d+=' L'+(x0+i*27)+','+y+' L'+(x0+(i+1)*27)+','+y}el('path',{d:d,class:'w'})})();
   digital([0,1,1,0,1,1,0,1,1,0,1,1,0,0,1,1,0,0,0,0,0,0],1);
   digital([0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0],2);
   digital([0,1,1,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],3);
   function bus(segs,row){var y=top+row*rh, m=y+H/2; segs.forEach(function(s){var a=x0+s[0]*cw,b=x0+s[1]*cw;
-      el('path',{d:'M'+a+','+m+' L'+(a+4)+','+y+' L'+(b-4)+','+y+' L'+b+','+m+' L'+(b-4)+','+(y+H)+' L'+(a+4)+','+(y+H)+' Z',class:'bus draw'});
-      if(s[2])el('text',{x:a+7,y:m+3.5,class:'bust'},s[2])})}
+      el('path',{d:'M'+a+','+m+' L'+(a+5)+','+y+' L'+(b-5)+','+y+' L'+b+','+m+' L'+(b-5)+','+(y+H)+' L'+(a+5)+','+(y+H)+' Z',class:s[3]?'bad':'bus'});
+      if(s[2])el('text',{x:a+9,y:m+4,class:s[3]?'badt':'bust'},s[2])})}
   bus([[0,1,''],[1,4,'04'],[4,7,'08'],[7,10,'0c'],[10,14,'0c'],[14,17,'0c'],[17,22,'']],4);
-  bus([[0,11,''],[11,12,'—'],[12,15,''],[15,17,'eff35b61'],[17,22,'']],5);
+  bus([[0,11,''],[11,12,'xx'],[12,15,''],[15,18,'eff35b61',1],[18,22,'']],5);
   var cx=x0+16*cw;
-  el('rect',{x:x0+15*cw,y:top+5*rh-6,width:2*cw,height:H+12,class:'badbox pop',rx:3});
-  el('line',{x1:cx,y1:6,x2:cx,y2:236,class:'cursor pop'});
-  el('text',{x:x0+15*cw-130,y:top+5*rh+34,class:'badt pop'},'scoreboard: byte 2 corrupted');
+  el('line',{x1:cx,y1:4,x2:cx,y2:194,class:'cursor'});
+  // On narrow screens the plate scrolls sideways; start it at the failing read.
+  var body=svg.parentNode; if(body.scrollWidth>body.clientWidth){body.scrollLeft=svg.getBoundingClientRect().width*(cx/1300)-body.clientWidth*0.6;}
 })();
 document.getElementById('copy').addEventListener('click',function(){
   var t=document.getElementById('addr').textContent, out=document.getElementById('copied');
