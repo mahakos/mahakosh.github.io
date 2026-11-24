@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verification case studies: AXI4-Lite, APB3, SPI, FIFO, UART · Neesil</title>
+<meta name="description" content="Five open chip verification case studies with code you can run: AXI4-Lite formal proof, APB3 coverage rebuild, SPI timing checks, a formally proven FIFO and UART line testing. 36 of 36 planted bugs caught.">
+<link rel="canonical" href="https://mahakos.github.io/mahakosh.github.io/work.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Neesil">
+<meta property="og:locale" content="en_IN">
+<meta property="og:title" content="Five blocks, 36 planted bugs, all caught">
+<meta property="og:description" content="Open verification case studies from Neesil, with code you can clone and run yourself.">
+<meta property="og:url" content="https://mahakos.github.io/mahakosh.github.io/work.html">
+<meta property="og:image" content="https://mahakos.github.io/mahakosh.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#13161d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;500;800&family=Noto+Sans+Telugu:wght@700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"Neesil verification case studies","url":"https://mahakos.github.io/mahakosh.github.io/work.html","publisher":{"@id":"https://mahakos.github.io/mahakosh.github.io/#neesil"},"mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://mahakos.github.io/mahakosh.github.io/work.html#axi4lite","item":{"@type":"SoftwareSourceCode","name":"AXI4-Lite: the two bugs simulation could not see","codeRepository":"https://github.com/mahakos/verikosh/tree/main/axi4lite","license":"https://www.apache.org/licenses/LICENSE-2.0"}},{"@type":"ListItem","position":2,"url":"https://mahakos.github.io/mahakosh.github.io/work.html#apb","item":{"@type":"SoftwareSourceCode","name":"APB3: a health check on our own testbench","codeRepository":"https://github.com/mahakos/verikosh/tree/main/apb","license":"https://www.apache.org/licenses/LICENSE-2.0"}},{"@type":"ListItem","position":3,"url":"https://mahakos.github.io/mahakosh.github.io/work.html#spi","item":{"@type":"SoftwareSourceCode","name":"SPI: the hold-time bug that got through","codeRepository":"https://github.com/mahakos/verikosh/tree/main/spi","license":"https://www.apache.org/licenses/LICENSE-2.0"}},{"@type":"ListItem","position":4,"url":"https://mahakos.github.io/mahakosh.github.io/work.html#fifo","item":{"@type":"SoftwareSourceCode","name":"Sync FIFO: proved, not just simulated","codeRepository":"https://github.com/mahakos/verikosh/tree/main/fifo","license":"https://www.apache.org/licenses/LICENSE-2.0"}},{"@type":"ListItem","position":5,"url":"https://mahakos.github.io/mahakosh.github.io/work.html#uart","item":{"@type":"SoftwareSourceCode","name":"UART: testing the line, not just the logic","codeRepository":"https://github.com/mahakos/verikosh/tree/main/uart","license":"https://www.apache.org/licenses/LICENSE-2.0"}}]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Neesil","item":"https://mahakos.github.io/mahakosh.github.io/"},{"@type":"ListItem","position":2,"name":"Case studies","item":"https://mahakos.github.io/mahakosh.github.io/work.html"}]}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="notice">
+  <div class="container">
+    <span>The first three teams get a one-week health check free.</span>
+    <span>Telangana, India. Working remotely with teams anywhere.</span>
+  </div>
+</div>
+
+<header class="bar">
+  <div class="container">
+    <a class="brand" href="./" aria-label="Neesil home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 7.5l5 4.5-5 8.5-5-8.5z" fill="currentColor"/><g stroke="currentColor" stroke-width="2"><path d="M9 0v3M14 0v3M19 0v3M9 25v3M14 25v3M19 25v3M0 9h3M0 14h3M0 19h3M25 9h3M25 14h3M25 19h3"/></g></svg>
+      Neesil
+    </a>
+    <nav aria-label="Main">
+      <a href="services.html">Services</a>
+      <a href="work.html" aria-current="page">Case studies</a>
+      <a href="report.html">Sample report</a>
+      <a href="start.html">Start a project</a>
+    </nav>
+    <a class="btn btn--primary btn--small" href="start.html#brief">Book a health check</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-head">
+  <div class="container">
+    <p class="crumbs"><a href="./">Neesil</a> / Case studies</p>
+    <div class="grid">
+      <h1>Five blocks, 36 planted bugs, all caught.</h1>
+      <p class="lead">Client work stays under NDA, so these case studies are on our own open designs. You can clone every one of them, run it, and check each number on this page yourself.</p>
+      <div class="actions"><a class="btn" href="https://github.com/mahakos/verikosh">Open the repository</a></div>
+    </div>
+    <div class="strip cs-list" aria-label="Totals across all five blocks">
+      <div><b>5</b><span>blocks verified</span></div>
+      <div><b>36/36</b><span>planted bugs caught</span></div>
+      <div><b>2</b><span>full formal proofs</span></div>
+      <div><b>304</b><span>coverage bins, all closed</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <article class="grid cs" id="axi4lite">
+      <div class="side">
+        <div class="plate"><div class="fig"><span class="figure">2</span><p>bugs caught only by the formal proof. Every simulation test passed with them in the design.</p></div></div>
+        <dl><dt>Block</dt><dd>AXI4-Lite register slave</dd><dt>Method</dt><dd>cocotb VIP plus SymbiYosys</dd><dt>Result</dt><dd>8 of 8 planted bugs caught</dd></dl>
+      </div>
+      <div class="body">
+        <h2>AXI4-Lite: the two bugs simulation could not see</h2>
+        <h3>The problem</h3>
+        <p>A register slave with independent write-address and write-data channels, one-entry buffers on each, and error responses for bad addresses and read-only registers. AXI lets AW and W arrive in any order and lets the master stall any response, which is where handshake bugs hide.</p>
+        <h3>What we built</h3>
+        <ul>
+          <li>A cocotb master that drives AW and W with independent random delays, so all three orderings happen</li>
+          <li>Random back-pressure on BREADY and RREADY, a monitor, a protocol checker on all five channels, and 76 coverage bins with crosses</li>
+          <li>Formal properties in the RTL: the master's rules assumed, the slave's asserted, proved for every reachable state by k-induction</li>
+        </ul>
+        <h3>What it caught</h3>
+        <p>Two planted bugs, ARREADY going high while a read response is still pending and WREADY ignoring a full buffer, passed every simulation test. Our master issues one transaction at a time, and a real interconnect does not. The formal proof found both in under two seconds. That is the practical case for running formal next to simulation on any bus interface.</p>
+        <div class="links"><a class="btn btn--small" href="https://github.com/mahakos/verikosh/tree/main/axi4lite">View code</a><a class="btn btn--small" href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See the planted bugs</a></div>
+      </div>
+    </article>
+
+    <article class="grid cs" id="apb">
+      <div class="side">
+        <div class="plate"><div class="fig"><span class="figure">5 → 8</span><p>planted bugs caught, after we ran our own health check on the testbench and fixed what it found.</p></div></div>
+        <dl><dt>Block</dt><dd>APB3 register file</dd><dt>Method</dt><dd>cocotb VIP, constrained random</dd><dt>Result</dt><dd>158 of 158 coverage bins</dd></dl>
+      </div>
+      <div class="body">
+        <h2>APB3: a health check on our own testbench</h2>
+        <h3>The problem</h3>
+        <p>Version 0.1 looked finished: three tests passing and 100% coverage. But coverage closed after only 100 to 200 random transfers, one planted bug was caught by luck and another by a Python crash instead of a clear error.</p>
+        <h3>What we changed</h3>
+        <ul>
+          <li>A clean X/Z check, so an undefined value on the bus fails with a message that points at the design</li>
+          <li>A directed reset-value test, so reset bugs no longer depend on a lucky seed</li>
+          <li>A coverage model rebuilt with register × strobe crosses: 158 bins that take about 1,100 to 1,800 transfers to close</li>
+          <li>Random wait states, a protocol checker and a hang timeout</li>
+        </ul>
+        <h3>What it shows</h3>
+        <p>A 100% coverage number can flatter a testbench. Measuring it with planted bugs is what told us where it was weak. This is the same review we run on client blocks, and the original report is published unchanged.</p>
+        <div class="links"><a class="btn btn--small" href="report.html">Read the report</a><a class="btn btn--small" href="https://github.com/mahakos/verikosh/tree/main/apb">View code</a></div>
+      </div>
+    </article>
+
+    <article class="grid cs" id="spi">
+      <div class="side">
+        <div class="plate"><div class="fig"><span class="figure">1</span><p>planted bug survived the first SPI testbench. The checker now measures it, and it is caught.</p></div></div>
+        <dl><dt>Block</dt><dd>SPI master, all four modes</dd><dt>Method</dt><dd>Reactive slave model and timing checker</dd><dt>Result</dt><dd>7 of 7 planted bugs caught</dd></dl>
+      </div>
+      <div class="body">
+        <h2>SPI: the hold-time bug that got through</h2>
+        <h3>The problem</h3>
+        <p>An SPI master with CPOL and CPHA modes, MSB- or LSB-first frames, a runtime clock divider and back-to-back transfers. Data checks alone pass even when the timing around chip select is wrong, and many real slaves fail on exactly that.</p>
+        <h3>What we built</h3>
+        <ul>
+          <li>A slave model written from the SPI timing rules, not from the RTL, that answers with queued bytes and records MOSI</li>
+          <li>A checker for SCLK idle level, edge count per frame, SCLK half-period, chip-select setup and hold</li>
+          <li>33 coverage bins, including a mode × bit order × divider cross</li>
+        </ul>
+        <h3>What it caught</h3>
+        <p>A planted bug that released chip select right after the last clock edge survived the first version, because no check measured hold time. We added the measurement, and the bug is now caught. On a client block, that gap would have been a finding in the health check.</p>
+        <div class="links"><a class="btn btn--small" href="https://github.com/mahakos/verikosh/tree/main/spi">View code</a></div>
+      </div>
+    </article>
+
+    <article class="grid cs" id="fifo">
+      <div class="side">
+        <div class="plate"><div class="fig"><span class="figure">0</span><p>simulation cycles. The FIFO is verified with a formal proof alone, for every reachable state.</p></div></div>
+        <dl><dt>Block</dt><dd>Synchronous FIFO</dd><dt>Method</dt><dd>Yosys, SMT solver, k-induction</dd><dt>Result</dt><dd>5 of 5 planted bugs caught</dd></dl>
+      </div>
+      <div class="body">
+        <h2>Sync FIFO: proved, not just simulated</h2>
+        <h3>The problem</h3>
+        <p>FIFOs look simple and still ship with bugs at the edges: full and empty at the same time, a push accepted when full, or data corrupted after the pointers wrap. Random simulation reaches those corners slowly, if at all.</p>
+        <h3>What we built</h3>
+        <ul>
+          <li>Invariants on the count, the flags and how far the count can move each cycle</li>
+          <li>A data-integrity property: any value written to any slot stays intact while live and is exactly what appears at the head</li>
+          <li>Cover traces for full, simultaneous push and pop, and draining after a wrap</li>
+        </ul>
+        <h3>What it caught</h3>
+        <p>All five planted bugs: an inverted full flag, overflow, underflow, a wrong read pointer and memory written on a refused push. Because k-induction is a full proof, there is no seed or test length that could have missed them.</p>
+        <div class="links"><a class="btn btn--small" href="https://github.com/mahakos/verikosh/tree/main/fifo">View code</a></div>
+      </div>
+    </article>
+
+    <article class="grid cs" id="uart">
+      <div class="side">
+        <div class="plate"><div class="fig"><span class="figure">±2%</span><p>baud-rate skew in the random tests, mixed with glitches, BREAKs, parity and framing errors.</p></div></div>
+        <dl><dt>Block</dt><dd>UART transceiver</dd><dt>Method</dt><dd>cocotb source and independent sink</dd><dt>Result</dt><dd>8 of 8 planted bugs caught</dd></dl>
+      </div>
+      <div class="body">
+        <h2>UART: testing the line, not just the logic</h2>
+        <h3>The problem</h3>
+        <p>A UART that passes with a perfect clock can still fail in the field, where the other side runs a little fast or slow and the line picks up noise. The tests have to model the line as it really behaves.</p>
+        <h3>What we built</h3>
+        <ul>
+          <li>A line driver that can skew the baud rate and inject parity errors, framing errors, BREAKs and start-bit glitches</li>
+          <li>A sink that decodes the design's transmit line on its own, without trusting the design's receiver</li>
+          <li>37 coverage bins across parity modes, divisors, skew and every error kind</li>
+        </ul>
+        <h3>What it caught</h3>
+        <p>All eight planted bugs, including sampling at the end of each bit instead of the middle, a missing stop bit after parity and a receiver that did not wait out a BREAK.</p>
+        <div class="links"><a class="btn btn--small" href="https://github.com/mahakos/verikosh/tree/main/uart">View code</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="next">
+  <div class="container grid contact">
+    <div class="head">
+      <h2>Want this on one of your blocks?</h2>
+      <p class="lead">Send us a few lines about the design. We sign an NDA first, then run the same planted-bug review on your testbench.</p>
+    </div>
+    <div class="mailbox">
+      <code class="addr">hello.neesil@gmail.com</code>
+      <div class="row">
+        <a class="btn btn--primary" href="start.html#brief">Describe your block</a>
+        <a class="btn" href="services.html#models">See prices</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="mast">
+  <div class="container">
+    <p class="word-mark" aria-hidden="true">Neesil</p>
+    <div class="foot">
+      <span>© 2026 Neesil, Telangana, India. Udyam-registered MSME (UDYAM-TS-20-0225825).</span>
+      <ul>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Case studies</a></li>
+        <li><a href="report.html">Sample report</a></li>
+        <li><a href="start.html">Start a project</a></li>
+        <li><a href="https://github.com/mahakos/verikosh">GitHub</a></li>
+        <li><a href="mailto:hello.neesil@gmail.com">hello.neesil@gmail.com</a></li>
+      </ul>
+    </div>
+    <p class="fine">Site text and design © 2026 Neesil, all rights reserved. Code in the verikosh repository is open source under the Apache License 2.0.</p>
+  </div>
+</footer>
+</body>
+</html>
