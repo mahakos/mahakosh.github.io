@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://mahakos.github.io/mahakosh.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Neesil">
+<meta property="og:locale" content="en_IN">
 <meta property="og:title" content="Neesil · Your silicon. Checked like it's ours.">
 <meta property="og:description" content="Founder-led chip verification for small silicon teams. UVM, cocotb, coverage closure and bug hunting before tape-out.">
 <meta property="og:url" content="https://mahakos.github.io/mahakosh.github.io/">
@@ -20,7 +21,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;500;800&family=Noto+Sans+Telugu:wght@700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Neesil","url":"https://mahakos.github.io/mahakosh.github.io/","email":"hello.neesil@gmail.com","description":"Chip design verification services: UVM and cocotb testbenches, functional coverage closure, SystemVerilog assertions, formal checks and bug triage.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressRegion":"Telangana","addressCountry":"IN"},"founder":{"@type":"Person","name":"Maneesh Jonnala"},"sameAs":["https://github.com/mahakos/verikosh"]}
+{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://mahakos.github.io/mahakosh.github.io/#neesil","name":"Neesil","url":"https://mahakos.github.io/mahakosh.github.io/","logo":"https://mahakos.github.io/mahakosh.github.io/assets/favicon.svg","image":"https://mahakos.github.io/mahakosh.github.io/assets/og.png","email":"hello.neesil@gmail.com","description":"Founder-led chip design verification services: UVM and cocotb testbenches, functional coverage closure, SystemVerilog assertions, formal verification and bug triage for ASIC and FPGA teams.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressRegion":"Telangana","addressCountry":"IN"},"founder":{"@type":"Person","name":"Maneesh Jonnala","jobTitle":"Founder and verification engineer"},"knowsAbout":["Design verification","UVM","cocotb","SystemVerilog assertions","Formal verification","Functional coverage","AMBA APB","AXI4-Lite","SPI","UART"],"sameAs":["https://github.com/mahakos/verikosh"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"You’re a new company. Why should I trust you?","acceptedAnswer":{"@type":"Answer","text":"You shouldn’t have to take it on trust. The first week is free and our code is public, so you see the quality of the work before you spend a rupee or a dollar."}},{"@type":"Question","name":"Will my RTL stay private?","acceptedAnswer":{"@type":"Answer","text":"Yes. We sign a mutual NDA before we see anything (yours or ours), can work on your machines or VPN, and never reuse client code in our open-source work."}},{"@type":"Question","name":"Do you put our code into AI tools?","acceptedAnswer":{"@type":"Answer","text":"No. Your RTL, specs and waveforms never go into ChatGPT, Copilot or any public AI service unless you agree in writing. How we keep your design safe."}},{"@type":"Question","name":"Do you need our commercial simulator licences?","acceptedAnswer":{"@type":"Answer","text":"No. We can work fully on open-source tools like Icarus Verilog, Verilator, cocotb and SymbiYosys. When you have VCS, Xcelium or Questa, we write UVM that runs on them."}},{"@type":"Question","name":"How is pricing decided?","acceptedAnswer":{"@type":"Answer","text":"After the health check we quote a fixed price per block, or a monthly contract for ongoing work. A small block typically costs ₹1.5 to 3 lakh, paid 40% at start, 40% when the regression runs and 20% at sign-off. All typical prices are here."}},{"@type":"Question","name":"Is Neesil a registered business?","acceptedAnswer":{"@type":"Answer","text":"Yes. Neesil is registered as an MSME (Udyam) in Telangana, India, and invoices properly for work in India and abroad."}},{"@type":"Question","name":"Do you work with teams outside India?","acceptedAnswer":{"@type":"Answer","text":"Yes. We work remotely and keep a few hours of daily overlap with your time zone."}}]}
 </script>
 </head>
 <body>
@@ -35,17 +39,17 @@
 
 <header class="bar">
   <div class="container">
-    <a class="brand" href="#top" aria-label="Neesil home">
+    <a class="brand" href="./" aria-label="Neesil home">
       <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 7.5l5 4.5-5 8.5-5-8.5z" fill="currentColor"/><g stroke="currentColor" stroke-width="2"><path d="M9 0v3M14 0v3M19 0v3M9 25v3M14 25v3M19 25v3M0 9h3M0 14h3M0 19h3M25 9h3M25 14h3M25 19h3"/></g></svg>
       Neesil
     </a>
     <nav aria-label="Main">
-      <a href="#work">Services</a>
-      <a href="#open">Open work</a>
+      <a href="services.html">Services</a>
+      <a href="work.html">Case studies</a>
       <a href="report.html">Sample report</a>
-      <a href="#how">How it works</a>
-      <a class="btn btn--primary btn--small" href="#contact">Talk to Maneesh</a>
+      <a href="start.html">Start a project</a>
     </nav>
+    <a class="btn btn--primary btn--small" href="start.html#brief">Book a health check</a>
   </div>
 </header>
 
@@ -66,7 +70,7 @@
       <h1>We find the bug before your silicon does.</h1>
       <p class="lead">Founder-led chip verification for small chip and FPGA teams.</p>
       <div class="actions">
-        <a class="btn btn--primary" href="#contact">Book a free health check</a>
+        <a class="btn btn--primary" href="start.html#brief">Book a free health check</a>
         <a class="btn" href="report.html">See a sample report</a>
       </div>
     </div>
@@ -134,6 +138,7 @@
         <p>Some bugs never show up in random simulation. Properties catch them early.</p>
         <ul><li>Protocol assertions for APB, AXI, SPI, I2C</li><li>Formal property checks on control logic</li><li>CI regression on every commit</li></ul>
       </article>
+      <p class="more"><a href="services.html">All six services, with typical prices</a></p>
     </div>
   </div>
 </section>
@@ -172,6 +177,7 @@
 <span class="g">Mutation score: 36/36 (100%)</span></pre>
     </div>
     <p class="board-foot">Every block is lint-clean under <code>verilator -Wall</code>, and CI runs lint, simulation on three seeds, the formal proofs and the full mutation run on every push. <a href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See all 36 planted bugs</a>.</p>
+    <p class="more"><a href="work.html">Read the five case studies</a></p>
   </div>
 </section>
 
@@ -183,7 +189,7 @@
     </div>
     <ol class="steps">
       <li><span class="when">Week 1<small>free</small></span><h3>Health check</h3><p>Share one block and its spec under NDA. We review your current tests and send a short report: what’s covered, what’s missing, and where we’d look for bugs first. <a href="report.html">This is what it looks like.</a></p></li>
-      <li><span class="when">Week 2<small>fixed price</small></span><h3>A quote you can plan around</h3><p>If the report helped, we quote a fixed price per block or a monthly retainer. No hourly surprises. Half up front, half on delivery.</p></li>
+      <li><span class="when">Week 2<small>fixed price</small></span><h3>A quote you can plan around</h3><p>If the report helped, we quote a fixed price per block or a monthly contract, <a href="services.html#models">from these ranges</a>. No hourly surprises. Payment follows milestones written into the quote.</p></li>
       <li><span class="when">Friday<small>every week after</small></span><h3>Plain-English updates</h3><p>A short note each Friday with coverage numbers, bugs found and what’s next. Two minutes to read.</p></li>
     </ol>
   </div>
@@ -215,8 +221,9 @@
     <div class="list">
       <details><summary>You’re a new company. Why should I trust you?</summary><p>You shouldn’t have to take it on trust. The first week is free and our code is public, so you see the quality of the work before you spend a rupee or a dollar.</p></details>
       <details><summary>Will my RTL stay private?</summary><p>Yes. We sign a mutual NDA before we see anything (yours or ours), can work on your machines or VPN, and never reuse client code in our open-source work.</p></details>
+      <details><summary>Do you put our code into AI tools?</summary><p>No. Your RTL, specs and waveforms never go into ChatGPT, Copilot or any public AI service unless you agree in writing. <a href="start.html#confidentiality">How we keep your design safe</a>.</p></details>
       <details><summary>Do you need our commercial simulator licences?</summary><p>No. We can work fully on open-source tools like Icarus Verilog, Verilator, cocotb and SymbiYosys. When you have VCS, Xcelium or Questa, we write UVM that runs on them.</p></details>
-      <details><summary>How is pricing decided?</summary><p>After the health check we quote a fixed price per block, or a monthly retainer for ongoing work. You know the cost before we start, and payment is split half up front and half on delivery.</p></details>
+      <details><summary>How is pricing decided?</summary><p>After the health check we quote a fixed price per block, or a monthly contract for ongoing work. A small block typically costs ₹1.5 to 3 lakh, paid 40% at start, 40% when the regression runs and 20% at sign-off. <a href="services.html#models">All typical prices are here</a>.</p></details>
       <details><summary>Is Neesil a registered business?</summary><p>Yes. Neesil is registered as an MSME (Udyam) in Telangana, India, and invoices properly for work in India and abroad.</p></details>
       <details><summary>Do you work with teams outside India?</summary><p>Yes. We work remotely and keep a few hours of daily overlap with your time zone.</p></details>
     </div>
@@ -243,6 +250,7 @@
       </div>
       <p class="copied" id="copied" aria-live="polite"></p>
     </div>
+    <p class="more contact-more"><a href="start.html#brief">Or fill in a short brief and we'll write the email for you</a></p>
   </div>
 </section>
 </main>
@@ -251,13 +259,17 @@
   <div class="container">
     <p class="word-mark" aria-hidden="true">Neesil</p>
     <div class="foot">
-      <span>© 2026 Neesil, Telangana, India. Udyam-registered MSME.</span>
+      <span>© 2026 Neesil, Telangana, India. Udyam-registered MSME (UDYAM-TS-20-0225825).</span>
       <ul>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Case studies</a></li>
         <li><a href="report.html">Sample report</a></li>
+        <li><a href="start.html">Start a project</a></li>
         <li><a href="https://github.com/mahakos/verikosh">GitHub</a></li>
-        <li><a href="mailto:hello.neesil@gmail.com">Email</a></li>
+        <li><a href="mailto:hello.neesil@gmail.com">hello.neesil@gmail.com</a></li>
       </ul>
     </div>
+    <p class="fine">Site text and design © 2026 Neesil, all rights reserved. Code in the verikosh repository is open source under the Apache License 2.0.</p>
   </div>
 </footer>
 
