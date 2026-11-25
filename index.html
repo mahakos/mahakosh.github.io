@@ -147,7 +147,7 @@
   <div class="container">
     <div class="grid split-head">
       <h2>Can I see your work before paying?</h2>
-      <p class="lead">Yes. Our verification IP is free and public, so you can clone it, run it and judge it first. Five blocks so far, 36 planted bugs, all 36 caught. Every number below comes from running the code.</p>
+      <p class="lead">Yes. Our verification IP is free and public, so you can clone it, run it and judge it first. Seven blocks so far, 56 hand-written planted bugs, all 56 caught. On top of that we planted 522 machine-generated one-line bugs: 519 caught, and the 3 left change nothing visible on the pins. Every number below comes from running the code.</p>
     </div>
     <div class="board-wrap" id="projects">
       <table class="board">
@@ -159,6 +159,8 @@
           <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/fifo">Sync FIFO, formally proven</a><span class="desc">A k-induction proof that what goes in comes out, in order, with no overflow or underflow. All 3 covers reached.</span></td><td class="num na">proof</td><td class="num na">formal</td><td class="num">5/5</td><td class="ver">live</td></tr>
           <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/uart">UART verification IP</a><span class="desc">Parity, framing errors, BREAK, start-bit glitches and ±2% baud-rate skew across random divisors.</span></td><td class="num">4/4</td><td class="num">37/37</td><td class="num">8/8</td><td class="ver">live</td></tr>
           <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/spi">SPI master VIP</a><span class="desc">All four SPI modes, MSB- and LSB-first, a reactive slave model and a timing checker on every frame.</span></td><td class="num">3/3</td><td class="num">33/33</td><td class="num">7/7</td><td class="ver">live</td></tr>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/i2c">I2C controller VIP</a><span class="desc">Target model and bus monitor checking I2C timing, clock stretching and multi-master arbitration.</span></td><td class="num">6/6</td><td class="num">29/29</td><td class="num">9/9</td><td class="ver">live</td></tr>
+          <tr><td class="name"><a href="https://github.com/mahakos/verikosh/tree/main/async_fifo">Dual-clock FIFO (CDC) + formal</a><span class="desc">Jittered clocks, flag and Gray-code checkers, resets released in any order, and a formal proof over every ordering of the two clocks.</span></td><td class="num">5/5</td><td class="num">17/17</td><td class="num">11/11</td><td class="ver">new</td></tr>
         </tbody>
       </table>
     </div>
@@ -174,9 +176,9 @@
   1900 txns, 0 errors, coverage 100%
 <span class="g">TESTS=4 PASS=4 FAIL=0</span>
 <span class="p">$</span> python3 tools/mutate.py
-<span class="g">Mutation score: 36/36 (100%)</span></pre>
+<span class="g">Mutation score: 56/56 (100%)</span></pre>
     </div>
-    <p class="board-foot">Every block is lint-clean under <code>verilator -Wall</code>, and CI runs lint, simulation on three seeds, the formal proofs and the full mutation run on every push. <a href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See all 36 planted bugs</a>.</p>
+    <p class="board-foot">Every block is lint-clean under <code>verilator -Wall</code>, and CI runs lint, simulation on three seeds, the formal proofs and the full mutation run on every push. <a href="https://github.com/mahakos/verikosh/blob/main/docs/MUTATION_REPORT.md">See all 56 planted bugs</a>.</p>
     <p class="more"><a href="work.html">Read the five case studies</a></p>
   </div>
 </section>
